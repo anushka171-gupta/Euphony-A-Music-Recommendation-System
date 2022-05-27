@@ -1,0 +1,219 @@
+{% extends 'Music/layout0.html' %} 
+{% load static %}
+
+{% block body %}
+
+<br><br>
+{% if song|length > 0 %}
+
+<div class="card mt-5" style="width:50%; height: auto; margin-left: 25%; text-align: center">
+<img src="{{song.cover_art}}" class="card-img-top center">
+<div class="card-body">
+<h1 class="card-title">{{ song.song_name }}</h1>
+<h3>
+  <a href="{% url 'artist' song.artist_id %}">
+  {{ song.artist }}
+  </a>
+</h3>
+{{song.album}}<br>
+{{song.year}}<br><br>
+{% if song.preview_url %}
+<audio controls>
+  <source src="{{song.preview_url}}" type="audio/ogg">
+  <source src="{{song.preview_url}}" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br><br>
+{% endif %} 
+{% if request.user.is_authenticated %}
+
+  <form method="post" id='like-form' action="{% url 'playlist' %}">
+    {% csrf_token %}
+    <input type="hidden"  name="song_name" value="{{song.id}}"></button>
+    <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+  </form>
+
+{% endif %}
+</div>
+</div>
+
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; text-align:center">More from <b>{{ song.artist }}</b></h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for track in artist_top_songs %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' track.id %}">
+        <img src="{{track.cover_art}}"  class="pl-5" height="200" width="250">
+      </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' track.id %}" style="color: black;">
+          {{track.song_name}}
+        </a>
+      </th>
+      <td style="vertical-align: middle">
+        {% if track.preview_url %}
+        <audio controls>
+          <source src="{{track.preview_url}}" type="audio/ogg">
+          <source src="{{track.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+        No Preview Available
+        {% endif %} 
+      </td>
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{track.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table> 
+
+
+{% if album_songs|length > 0 %} 
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; text-align:center">More from the album <b>{{ song.album }}</b></h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for track in album_songs.songs %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' track.id %}">
+        <img src="{{album_songs.album_image}}"  class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' track.id %}" style="color: black;">
+        {{track.song_name}} 
+        </a>
+      </th>
+      <td style="vertical-align: middle">
+        {% if track.preview_url %}
+        <audio controls>
+          <source src="{{track.preview_url}}" type="audio/ogg">
+          <source src="{{track.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+        No Preview Available
+        {% endif %} 
+      </td>
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{track.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table>
+
+{% endif %}
+
+
+{% if recommended_songs|length > 0 %}
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">Songs You May Like</h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for song in recommended_songs %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' song.id %}">
+        <img src="{{song.cover_art}}"  class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' song.id %}" style="color: black;">
+        {{song.song_name}}
+        </a>
+      </th>
+      <td style="vertical-align: middle">
+        <a href="{% url 'artist' song.artist_id %}" style="color: black;">
+        {{song.artist}}
+        </a>
+      </td>
+      <td style="vertical-align: middle">
+        {% if song.preview_url %}
+      <audio controls>
+        <source src="{{song.preview_url}}" type="audio/ogg">
+        <source src="{{song.preview_url}}" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+      {% else %} 
+      No Preview Available
+      {% endif %} 
+      </td>
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{song.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table>
+
+{% endif %}
+
+
+{% if similar_artists|length > 0 %}
+<br><br>
+<h1 style="font-family:'Times New Roman', Times, serif; text-align:center">More Like <b>{{song.artist}}</b></h1>
+<br><br>
+<div class="explore_artists" style="background-image: url({{song_artist.image}});">
+  <br><br>
+  {% for artist in similar_artists %} 
+      <div class="card m-5 card_artists" style="height: 500px; width: 400px;">
+        <a href="{% url 'artist' artist.id %}" style="color: black">
+        <img class="card-img-top" src="{{artist.image}}" alt="{{artist.name}}" height="400px">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align:center; padding-top: 5%">{{artist.artist_name}}</h5>
+     
+        </div>
+      </a>
+      </div>
+      <br>
+         
+  {% endfor %}
+</div>
+{% endif %}
+
+{% else %} 
+
+<br><br><br>
+<h1  style="font-family: 'Times New Roman', Times, serif; font-weight:bold; text-align: center;">No Information Available</h1>
+<br><br>
+
+{% endif %}
+
+{% endblock %}

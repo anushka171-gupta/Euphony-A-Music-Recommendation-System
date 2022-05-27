@@ -1,0 +1,108 @@
+{% extends 'Music/layout1.html' %} 
+
+{% block body %} 
+<div class="bgimg-1">
+<div class="caption-title">
+<span class="border">EUPHONY</span>
+</div>
+<div class="caption">
+    <span class="second-caption">
+      Where words fail, music speaks.
+    </span>
+    </div>
+</div>
+       
+<div class="head">
+
+    <div class="header-home header">
+      <div class="title"><a href="{% url 'index' %}" style="text-decoration: none; color: black;">EUPHONY</a></div>
+      
+      <div class="my-navbar">
+      {% if request.user.is_authenticated %}
+
+      <div class="dropdown" >
+          <button class="header_elements btn my-drop-btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><div class="nav-items">{{ user.username }}</div></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{% url 'playlist' %}">My Playlist</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+      </div>
+
+      {% else %}
+
+      <a href="{% url 'register' %}"><button class="btn header_elements my-drop-btn"><div class="nav-items">Register</div></button></a>
+      <a href="{% url 'login' %}"><button class="btn header_elements my-drop-btn"><div class="nav-items">Login</div></button></a>
+
+      {% endif %}
+
+      <a href="{% url 'search' %}"><button class="btn header_elements my-drop-btn"><div class="nav-items">Search</div></button></a>
+      <a href="{% url 'explore' %}"><button class="btn header_elements my-drop-btn"><div class="nav-items">Explore</div></button></a>
+      <a href="{% url 'index' %}"><button class="btn header_elements my-drop-btn"><div class="nav-items">Home</div></button></a>
+      
+    </div>
+  </div>
+
+</div>
+
+<div class="res-nav">
+  <br><br>
+  <br><br><br>
+
+  <div class="nav-element">
+    <a class="res-nav-ele" href="{% url 'index' %}">Home</a>
+  </div>
+  <div class="nav-element">
+    <a class="res-nav-ele" href="{% url 'explore' %}">Explore</a>
+  </div>
+  <div class="nav-element">
+    <a  class="res-nav-ele" href="{% url 'search' %}">Search</a>
+  </div>
+
+  {% if request.user.is_authenticated %}
+
+  <div class="nav-element">
+    <div class="dropdown nav-element" >
+      <button style="background-color: transparent; border:0;" class="res-nav-ele dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="res-nav-ele dropdown-item" href="{% url 'playlist' %}">My Favourites</a>
+        <a class="res-nav-ele dropdown-item" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+
+  <div class="nav-element">
+    <a  class="res-nav-ele" href="{% url 'login' %}">Login</a>
+  </div>
+  <div class="nav-element">
+      <a  class="res-nav-ele" href="{% url 'register' %}">Register</a>
+  </div>
+
+  {% endif %}
+
+</div>
+
+<br><br><br><br>
+<div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+
+  <h3 style="text-align:center;">About Us</h3>
+  <br>
+  <p>
+    Euphony is a website that offers thousands of songs to choose from.
+    From searching for a song to adding it to favourites list - Euphony allows a variety of features to help you find the music you are looking for.
+    Get recommendations on the basis of your search result and your favourites list. 
+    Find similar artists to the ones you like.
+  </p>
+  <p style="text-align: center;">So, what are you waiting for?</p>
+  <p style="text-align: center;">EUPHONY - A perfect place for finding the music you('ll) love.</p>
+
+</div>
+
+<div class="bgimg-1">
+  <div class="caption">
+  <span class="border"><span class="my_border">Discover 100s of songs!</span></span>
+  </div>
+</div>
+  
+{% endblock %}

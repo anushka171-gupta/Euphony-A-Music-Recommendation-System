@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+}
+
+#title {
+    padding-left: 40%;
+    margin-top: 0px;
+    padding-top: 7%;
+    font-size: 70px;
+    font-family: IM Fell DW Pica SC,'WindSong',Kristi,Reanie Beanie,Meddon,Caudex,Nothing You Could Do,Zen Antique Soft,Noto Serif Display,Dancing Script,Cinzel,Parisienne,Sacramento,Grey Qo,Tangerine,Gentium Book Basic,Ephesis,Allura,Alex Brush,Cherish,Italianno,Mrs Saint Delafield,Allison,Mr De Haviland,Monsieur La Doulaise,Megrim,Rouge Script,Over the Rainbow,Clicker Script, Stalemate,IM Fell DW Pica SC,IM Fell French Canon SC,Meie Script,Ruthie,Beth Allen,Elseie Swash Caps;
+}
+
+.background {
+    background-image: url(image.jpg);
+    background-size: cover;
+    height: 100vh;
+}
+
+#explore {
+    margin-top: 3%;
+    margin-left: 44%;
+    text-align: center;
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+    border: 3px solid black;
+}
+
+#explore:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: black;
+    color: white;
+  }
+
+.app {
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+}
+.app > * {
+  grid-column: 2 / -2;
+}
+.app > .full {
+  grid-column: 1 / -1;
+}
+
+.hs {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(6, calc(50% - 40px));
+  grid-template-rows: minmax(150px, 1fr);
+}
+
+
+.hs > li:last-child {
+  margin-right: 20px;
+}
+
+

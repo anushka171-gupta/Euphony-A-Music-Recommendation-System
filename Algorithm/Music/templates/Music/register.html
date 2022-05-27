@@ -1,0 +1,33 @@
+{% extends 'Music/layout0.html' %} 
+
+
+{% if message %}  
+<div>{{ message }}</div>
+{% endif %}
+
+{% block body %} 
+
+<br><br>
+<div class="login">
+<div class="register">
+  {% csrf_token %}
+  <input type="hidden" id="csrf" value="{{ csrf_token }}">
+    <h1>Register</h1>
+    <hr>
+    <label for="first_name"><b>First Name</b></label>
+    <input type="text" placeholder="Enter First Name" id="first_name" name="first_name" required>
+    <label for="last_name"><b>Last Name</b></label>
+    <input type="text" placeholder="Enter Last Name" id="last_name" name="last_name" required>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" id="username" name="username" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" name="password" required>
+
+    <div class="clearfix">
+      <button type="submit" class="submit signupbtn" onclick="register()">Sign Up</button>
+    </div>
+    <p class="mt-5">Already have an account? <a href="{% url 'login' %}" style="color:dodgerblue">Login.</a></p>
+  </div>
+</div>
+
+{% endblock %}

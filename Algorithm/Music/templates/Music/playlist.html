@@ -1,0 +1,115 @@
+{% extends 'Music/layout0.html' %} 
+{% load static %}
+
+{% block body %}
+
+<br><br>
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">My Favourites</h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for song in my_songs %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' song.id %}">
+          <img src="{{song.cover_art}}"  class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' song.id %}" style="color: black;" >
+          {{song.song_name}}
+        </a>
+      </th>
+
+      <td style="vertical-align: middle">
+        <a href="{% url 'artist' song.artist_id %}" style="color: black;" >
+          {{song.artist}}
+        </a>
+      </td>
+
+      <td style="vertical-align: middle; text-align: center">
+        {% if song.preview_url %}
+        <audio controls>
+          <source src="{{song.preview_url}}" type="audio/ogg">
+          <source src="{{song.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+        No Preview Available 
+        {% endif %}
+      </td>
+
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle; text-align: center">
+        <form method="post" id='like-form' action="{% url 'delete' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="remove" value="{{song.id}}"></button>
+          <input type="submit" value="Remove from Favourites" class="favourites btn btn-outline-danger"></button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table>
+
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">Songs You May Like</h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for song in recommended %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' song.id %}">
+          <img src="{{song.cover_art}}"  class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' song.id %}" style="color: black;" >
+          {{song.song_name}}
+        </a>
+      </th>
+
+      <td style="vertical-align: middle">
+        <a href="{% url 'artist' song.artist_id %}" style="color: black;" >
+          {{song.artist}}
+        </a>
+      </td>
+
+      <td style="vertical-align: middle">
+        {% if song.preview_url %}
+        <audio controls>
+          <source src="{{song.preview_url}}" type="audio/ogg">
+          <source src="{{song.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+        No Preview Available 
+        {% endif %}
+      </td>
+
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle; text-align: center">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{song.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table>
+
+
+{% endblock %}

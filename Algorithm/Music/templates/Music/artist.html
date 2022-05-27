@@ -1,0 +1,94 @@
+{% extends 'Music/layout0.html' %} 
+{% load static %}
+
+{% block body %}
+
+<br><br>
+
+{% if artist|length > 0 %}
+<div class="card mt-5" style="width:50%; height: auto; margin-left: 25%; text-align: center">
+  <img src="{{artist.image}}" class="card-img-top center">
+  <div class="card-body">
+    <h1 class="card-title pt-5" style="font-family: 'Times New Roman', Times, serif; font-weight:bold">{{ artist.artist_name }}</h1>
+    <br><br>
+  </div>
+</div>
+
+{% if artist_top_songs|length > 0 %}
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; text-align:center">Top Songs From <b>{{ artist.artist_name }}</b></h1>
+
+<table class="table table-hover table-borderless mt-5" width="70%">
+  <tbody>
+  {% for track in artist_top_songs %} 
+
+  <tr style="border: 2px solid white">
+      <td>
+        <a href="{% url 'song' track.id %}">
+        <img src="{{track.cover_art}}"  class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle"> 
+        <a href="{% url 'song' track.id %}" style="color: black;">
+        {{track.song_name}}
+        </a>
+      </th>
+
+      <td style="vertical-align: middle">
+        {% if track.preview_url %}
+        <audio controls>
+        <source src="{{track.preview_url}}" type="audio/ogg">
+        <source src="{{track.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+        No Preview Available
+        {% endif %} 
+      </td>
+
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{track.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+
+    </tr>
+
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+
+{% if similar_artists|length > 0 %}
+<br><br>
+<h1 style="font-family:'Times New Roman', Times, serif; text-align:center">More Like <b>{{artist.artist_name}}</b></h1>
+<br><br>
+<div class="explore_artists similar_artists" style="background-image: url({{artist.image}});">
+  <br><br>
+  {% for artist in similar_artists %} 
+      <div class="card m-5 p-0" style="height: 500px; width: 400px; border: 2px solid white;">
+        <a href="{% url 'artist' artist.id %}" style="color: black">
+        <img class="card-img-top" src="{{artist.image}}" alt="{{artist.name}}" height="400px">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align:center; padding-top: 5%">{{artist.artist_name}}</h5>
+        </div>
+        </a>
+      </div>
+      <br>
+  {% endfor %}
+</div>
+
+{% endif %}
+
+{% else %} 
+<br><br><br>
+<h1  style="font-family: 'Times New Roman', Times, serif; font-weight:bold; text-align: center;">No Information Available</h1>
+<br><br>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+Django==4.0.4
+pandas==1.4.2
+seaborn==0.11.2
+plotly==5.8.0
+matplotlib==3.5.2
+sklearn==0.0
+scipy==1.8.0
+yellowbrick==1.4
+spotipy==2.19.0
+djangorestframework==3.13.1

@@ -1,0 +1,91 @@
+{% extends 'Music/layout0.html' %} 
+{% load static %}
+
+{% block body %}
+<br><br>
+
+{% if message %} 
+
+<div class="alert alert-danger">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  {{message}}
+</div>
+
+{% endif %}
+
+<h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">Top Songs</h1>
+
+<div class="explore_songs">
+
+<table class="table table-borderless table-hover mt-5 p-5">
+  <tbody>
+  {% for song in default_songs %} 
+
+    <tr style="border: 2px solid white">
+
+      <td>
+        <a href="{% url 'song' song.id %}">
+        <img src="{{song.cover_art}}" class="pl-5" height="200" width="250">
+        </a>
+      </td>
+      
+      <th style="vertical-align: middle">
+        <a href="{% url 'song' song.id %}" style="color: black">
+          {{song.song_name}}
+        </a>
+      </th>
+
+      <td style="vertical-align: middle">
+        <a href="{% url 'artist' song.artist_id %}" style="color: black">
+        {{song.artist}}
+        </a>
+      </td>
+
+      <td style="vertical-align: middle">
+        {% if song.preview_url %}
+        <audio controls>
+          <source src="{{song.preview_url}}" type="audio/ogg">
+          <source src="{{song.preview_url}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+        {% else %} 
+          No Preview Available
+        {% endif %}
+      </td>
+
+      {% if request.user.is_authenticated %}
+      <td style="vertical-align: middle">
+        <form method="post" id='like-form' action="{% url 'playlist' %}">
+          {% csrf_token %}
+          <input type="hidden"  name="song_name" value="{{song.id}}"></button>
+          <input type="submit" value="Add to Favourites" class="favourites btn btn-outline-primary"></button>
+        </form>
+      </td>
+      {% endif %}
+
+    </tr>
+
+  {% endfor %}
+</tbody>
+</table>
+</div>
+
+<br><br>
+<h1 style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">Top Artists</h1>
+<br><br>
+<div class="explore_artists">
+  <br><br>
+  {% for artist in default_artists %} 
+      <div class="card mt-5 ml-5 mb-5" style="height: 500px; width: 400px">
+        <a href="{% url 'artist' artist.id %}" style="color: black">
+        <img class="card-img-top" src="{{artist.image}}" alt="{{artist.name}}" height="400px">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align:center; padding-top: 5%;">{{artist.artist_name}}</h5>
+        </div>
+        </a>
+      </div>
+      <br>
+  {% endfor %}
+</div>
+
+{% endblock %}
