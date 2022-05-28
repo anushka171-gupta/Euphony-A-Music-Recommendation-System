@@ -5,6 +5,8 @@
 
 <br><br>
 
+{% if my_songs|length > 0 %}
+
 <h1 class="mt-5" style="font-family:'Times New Roman', Times, serif; font-weight:bold; text-align:center">My Favourites</h1>
 
 <table class="table table-hover table-borderless mt-5" width="70%">
@@ -111,5 +113,9 @@
 </tbody>
 </table>
 
+{% else %}
+
+<h1 style="text-align: center">No songs in the favourites list</h1>
+<p style="text-align: center">(Add songs to favourites to get recommendations)</p>
 
 {% endblock %}
