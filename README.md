@@ -93,8 +93,17 @@ This algorithm was chosen as it does not require any data about the users which 
 
 #### Dataset Files
 1. ```data.csv```: This file consists of all the details about the song along with its audio features.
+
+![data](https://user-images.githubusercontent.com/79011361/170828676-11694c4c-157e-4cfe-9ae8-93e91d2e0175.png)
+
 2. ```data_by_genres```: This file consists of details about the genres.
+
+![genre_data](https://user-images.githubusercontent.com/79011361/170828690-48362d5c-3d9e-4f74-a295-8c74c97d391b.png)
+
 3. ```data_by_year```: This file consists of the song details based on the year
+
+![year_data](https://user-images.githubusercontent.com/79011361/170828710-c50983bd-8f4d-477c-81b9-5fb84cea4bbd.png)
+
 
 ## Python Packages and Libraries
 1. ```Pandas```: It is an open source package that is commonly used for Data Science/Data Analysis and Machine Learning. 
