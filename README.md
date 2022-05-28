@@ -1,5 +1,5 @@
 # Euphony-A-Music-Recommendation-System
-Microsoft Engage 2022 Project: Algorithms - Music Recommendation System
+Microsoft Engage 2022 Project: Algorithms - Music Recommendation System (by Anushka Gupta)
 
 
 ## Table of Contents
@@ -7,6 +7,8 @@ Microsoft Engage 2022 Project: Algorithms - Music Recommendation System
 - [Tech Stack Used](#tech-stack-used)
 - [Recommendation System](#recommendation-system)
 - [Setup](#setup)
+- [Major Files and Folders](#major-files-and-folders)
+- [Video Demo](#video-demo)
 
 ## Introduction
 Euphony is a website that offers thousands of songs to the users. From searching for a song to adding it to favourites list - Euphony allows a variety of features to help you find the music you are looking for. Get recommendations on the basis of your search result and your favourites list. Find similar artists to the ones you like.
@@ -35,16 +37,16 @@ The first thing to do is to clone the repository:
 $ git clone https://github.com/anushka171-gupta/Euphony-A-Music-Recommendation-System
 $ cd Euphony-A-Music-Recommendation-System-master
 ```
-#### Activate virtual environment
+Activate virtual environment:
 ```
 $ env\Scripts\activate.bat
 ```
-#### Installing requirements
+Installing requirements:
 ```
 (env)$ cd Algorithm
 (env)$ pip install -r requirements.txt
 ```
-#### Run the application
+Run the application:
 ```
 (env)$ python manage.py runserver
 ```
@@ -60,3 +62,26 @@ Paste the url in the browser followed by **Music/** as shown in the image below:
 The index page will open up:
 
 ![Screenshot (2070)](https://user-images.githubusercontent.com/79011361/170816984-b36c3475-5ec1-4197-9e79-ec0845213553.png)
+
+## Major Files and Folders
+1. ```Music\views.py```: It consists of functions that take http requests and return http response, like HTML documents. 
+2. ```Music\models.py```: It consists of class that represents table or collection in the databse, and where every attribute of the class is a field of the table or collection.
+3. ```Music\manage.py```: It is a command-line utility that allows interaction with this Django project in various ways.
+4. ```Music\urls.py```: It maps the urls of the app with the views in views.py of app.
+5. ```Music\templates\Music\```: This folder consists of all the html files.
+6. ```Music\static\css\```: This folder contains all the css files of the project.
+
+#### Dataset Files
+1. ```data.csv```: This file consists of all the details about the song along with its audio features.
+2. ```data_by_genres```: This file consists of details about the genres.
+3. ```data_by_year```: This file consists of the song details based on the year
+
+## Video Demo
+Video demo: https://www.youtube.com/watch?v=fVxw9EEMuww
+
+
+
+
+
+
+
