@@ -71,8 +71,6 @@ from scipy.spatial.distance import cdist
 import warnings
 warnings.filterwarnings("ignore")
 
-# from yellowbrick.target import FeatureCorrelation
-
 feature_names = ['acousticness', 'danceability', 'energy', 'instrumentalness',
        'liveness', 'loudness', 'speechiness', 'tempo', 'valence','duration_ms','explicit','key','mode','year']
 
@@ -119,7 +117,6 @@ client_secret="de945523c9ed46d5865f206df3e89da0"
 
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 
-# sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=client_id, client_secret=client_secret))
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
@@ -188,22 +185,22 @@ def get_mean_vector(song_list, spotify_data):
         song_vector = song_data[number_cols].values
         song_vectors.append(song_vector)  
       
-    # converting list of song features to numpy ndarray
+    # convert list of song features to numpy ndarray
     song_matrix = np.array(list(song_vectors))
 
-    # calculates mean of the given data along the columns(song features)
+    # calculate mean of the given data along the columns(song features)
     return np.mean(song_matrix, axis=0)
 
 
-# converting song name, artist name, year to default dictionary
+# convert song name, artist name, year to default dictionary
 def flatten_dict_list(dict_list):
     
-    # creating empty dictionary with keys as artists, name, year
+    # create empty dictionary with keys as artists, name, year
     flattened_dict = defaultdict()
     for key in dict_list[0].keys():
         flattened_dict[key] = []
 
-    # assigning values to keys - artists, name, year
+    # assign values to keys - artists, name, year
     for dictionary in dict_list:
         for key, value in dictionary.items():
             flattened_dict[key].append(value)
