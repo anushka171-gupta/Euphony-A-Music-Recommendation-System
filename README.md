@@ -63,8 +63,8 @@ The index page will open up:
 ## Recommendation System
 #### What recommendation technique was used in this project?
 This project makes use of Content Based Filtering for suggesting the songs to the users based on the songs that are in their playlist or the search result. 
-Content based filtering makes use of similarities in features of songs to suggest songs to the users. It has been implemented using K-means with cosine similarity. The dataset for the project was downloaded from kaggle.
-
+Content based filtering makes use of similarities in features of songs to suggest songs to the users. <!-- (It has been implemented using K-means with cosine similarity.) --> The dataset for the project was downloaded from kaggle.
+<!--
 **K-Means Clustering**<br>
 K-Means is an algorithm that tries to partition the dataset into K pre-defined distinct non-overlapping subgroups (clusters). Each data point belongs to only one group. It follows the approach of Expectation-Maximization. It works in the following way:
 1. Specify number of clusters K.
@@ -73,7 +73,7 @@ K-Means is an algorithm that tries to partition the dataset into K pre-defined d
 4. Compute the sum of the squared distance between data points and all centroids.
 5. Assign each data point to the closest cluster (centroid).
 6. Compute the centroids for the clusters by taking the average of all the data points that belong to each cluster
-
+-->
 **Cosine Similarity**<br>
 Cosine Similarity is a measurement that quantifies the similarity between two or more vectors irrespective of their size. Mathematically, it measures the cosine of the angle between two vectors projected in a multi-dimensional space.
 <br>
